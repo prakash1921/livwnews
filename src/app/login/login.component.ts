@@ -1,24 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from './services/firebase.service';
+import { FirebaseService } from '../services/firebase.service';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 // import { ToastrManager } from 'ng6-toastr-notifications';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class AppComponent implements OnInit {
-  title = 'angularnews';
-  isSignedIn = false;
+export class LoginComponent implements OnInit {
   myForm: any = [];
-  invaliderr: any;
   submitted = false;
   emailneed: string='';
   userName: any='';
   userimg: any='';
-  userdetails: any;
-  // constructor(public firebaseService:FirebaseService,public route: Router, public fb: FormBuilder,public toastr: ToastrManager){}
   constructor(public firebaseService: FirebaseService,
     public route: Router, public fb: FormBuilder,public router:Router) { }
 
@@ -27,22 +22,25 @@ export class AppComponent implements OnInit {
       'email': new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
       'password': new FormControl('', [Validators.required, Validators.minLength(6)]),
     })
-    if (localStorage.getItem('user') != null)
-      this.isSignedIn = true
-    else
-      this.isSignedIn = false
-
-      this.getUserDetails();
+    this.getUserDetails();
   }
-  async onSignup() {
+  getUserDetails(){
+    var userdetails= JSON.parse(localStorage.getItem('user'));
+    if(userdetails!=undefined){
+      console.log('user',userdetails.providerData[0])
+      this.userName=userdetails.providerData[0].displayName;
+      this.userimg=userdetails.providerData[0].photoURL;
+    }
+  
+   }
+
+   async onSignup() {
     var password = this.myForm.value.password;
     var email = this.myForm.value.email
     await this.firebaseService.signup(email, password)
-    if (this.firebaseService.isLoggedIn)
-      this.isSignedIn = true
-  }
+   }
 
-  async onSignin() {
+   async onSignin() {
 
     this.submitted = true;
 
@@ -55,28 +53,14 @@ export class AppComponent implements OnInit {
     await this.firebaseService.signIn(email, password);
 
     if (this.firebaseService.isLoggedIn){
-      this.isSignedIn = true;
       this.getUserDetails();
+      this.router.navigateByUrl('home')
     }
      
 
 
   }
-  getUserDetails(){
-   this.userdetails= JSON.parse(localStorage.getItem('user'));
-   console.log('user',this.userdetails)
-   if(this.userdetails!=undefined){
-    console.log('user',this.userdetails.providerData[0])
-    this.userName=this.userdetails.providerData[0].displayName;
-    this.userimg=this.userdetails.providerData[0].photoURL;
-  
-   }
-  }
- async  logout() {
-    await this.firebaseService.logout();
-    this.userdetails=undefined;
-    this.router.navigateByUrl('login')
-  }
+
   get f() { return this.myForm.controls; }
 
 
@@ -101,15 +85,4 @@ export class AppComponent implements OnInit {
 
 
   }
-
-
-
-
-
-
-
-  
-  
 }
-
-// https://stackblitz.com/edit/angular-email-validation?file=app%2Fapp.component.html

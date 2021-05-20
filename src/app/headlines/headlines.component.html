@@ -1,0 +1,65 @@
+
+<div class="container">
+    <div class="card mb-3">
+        <div class="card-header">
+          Select Filters
+      </div>
+        <div class="card-body"  style="padding: 11px 7px 12px 7px;">
+          <div class="row">
+    <form [formGroup]="search">
+        <div class="col-md-6 mx-4">
+      
+        <div class="form-group">
+            <label for='searchvalue'style="    font-size: 25px;"> Author Name</label>
+            <input  style="    border: 1px solid;" formControlName="searchvalue"  (change)='getvalue($event.target.value)'>
+            
+            </div>
+            </div>
+            </form>
+            </div>
+            </div>
+            </div>
+    <h1 style="text-align: center;">News List</h1>
+    <div class="row" *ngIf='List.length!=0'>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-12 mt-1">
+  
+               
+              </div>
+            </div>
+          </div>
+          <div class="card-body" style="overflow-x:auto;">
+            <table class="table table-responsive-sm table-hover table-outline mb-0" style="    text-align: center;
+            border: 1px solid #DCDCDC !important;">
+              <thead class="thead-light">
+                <tr>
+                  <th  style="width: 30%;">Image</th>
+                  <th> Title</th>
+                  <th style="    width: 23%;">Date</th>
+                </tr>
+              </thead>
+              <tbody style="text-align: -webkit-center !important;">
+                <tr
+                  
+                  *ngFor="let item of List.articles | paginate: {itemsPerPage: 5, currentPage: p}" (click)="$event.stopPropagation();detailsPage(item.id)">
+                  <td>
+                   <img src="{{item.urlToImage}}" style="width: 80%;">
+                  </td>
+                  <td>
+                    {{item.title}}
+                  </td>
+                  <td>
+                    {{item.publishedAt| date: 'dd-MM-yyyy'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <pagination-controls style="float:right"  (pageChange)="p=$event"></pagination-controls>
+      </div>
+    </div>
+  </div>

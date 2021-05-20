@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <div class="center">
+   <form class="row " [(formGroup)]="myForm" >
+      <div class="card  p-0">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-md-12 col-sm-6">
+              <label class="form-label"> Email</label>
+              <input type="email" class="form-control" autocomplete="off"  formControlName="email" name="email"
+                id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"  >
+              <div *ngIf="f.email.errors" class="invalid-feedback">
+              <span *ngIf="f.email.errors.required" style="color: red;">Email is required</span>
+                            <span *ngIf="f.email.errors.email" style="color: red;">Email must be a valid email address</span>
+                          </div>
+                         <span *ngIf='emailneed.length!=0' style="color: red;">{{emailneed}}</span> 
+
+                          </div>
+            <div class="col-md-12 col-sm-6 mt-3">
+              <label class="form-label"> Password</label>
+              <input type="password" autocomplete="off" class="form-control" formControlName="password" name="password"
+                id="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <span *ngIf="f.password.errors.required">Password is required</span> 
+                   <span *ngIf="f.password.errors.minlength">Password must be at least 6 characters</span> 
+              </div>
+
+            </div>
+            <div class="col-md-12 col-sm-6 mt-3 mb-3 " style="text-align:center;">
+              <button   style="width: inherit;" type="submit" class="btn  btn-primary btn-lg px-5"  (click)="onSignin()">Login</button>
+          
+            </div>
+            <div  class="col-md-6 col-sm-6" style="font-size: 16px;color:blue;"><u style="float: left;" ><span (click)="forgetpassword()">Forgot password</span></u></div>
+
+            <div  class="col-md-6 col-sm-6" style="font-size: 16px;color:blue;"><u style="float: right;" ><span (click)="googlesignin()">Create account</span></u></div>
+          </div>
+          
+        </div>
+        
+      </div>
+    
+    </form>
+  </div>
+
+</div>
+
+
+ 

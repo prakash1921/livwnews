@@ -1,0 +1,62 @@
+<!-- <p>headlines-details works!</p> -->
+<div class="conatiner" *ngIf="authrDetails.length!=0">
+    <div class="row">
+        <div class="col-md-6 mx-2 my-3">
+            <img [src]="authrDetails[0].urlToImage" style="width:95%">
+        </div>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row mt-3" >
+                        <div class="col-md-1">
+                           <h4>Auther:</h4>
+                        </div>
+                        <div class="col-md-8 mt-1">
+                         <p>{{authrDetails[0].author==null?'-':authrDetails[0].author}}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1">
+                            <h4>Content:</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{authrDetails[0].content}}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1">
+                            <h4> Title:</h4>
+                        </div>
+                        <div class="col-md-8">
+                           <p>{{authrDetails[0].title}}</p> 
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1">
+                            <h4>Url:</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <p>{{authrDetails[0].url}}</p>  
+                        </div>
+                    </div>
+
+                    <!-- <span  class="hd">Auther:</span><span class="hv">{{authrDetails[0].author}}</span><br>
+                    <span class="hd" >Content:</span><span class="hv">{{authrDetails[0].content}}</span><br>
+
+                    <span class="hd">Title:</span><span class="hv">{{authrDetails[0].title}}</span><br>
+
+                    <span class="hd">Url:</span><span class="hv">{{authrDetails[0].url}}</span><br> -->
+
+                        <!-- <h1>Url:<h1><h4>C{{authrDetails[0].url}}</h4> -->
+                    <!-- <p><br>
+                        Title:{{authrDetails[0].title}}
+                        Url:{{authrDetails[0].url}}
+                    </p> -->
+                    
+                </div>
+            </div>
+            <!-- <img [src]="authrDetails.urlToImage"> -->
+        </div>
+    </div>
+    <!-- </div> -->
+
