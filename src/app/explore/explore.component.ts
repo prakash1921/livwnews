@@ -16,6 +16,7 @@ export class ExploreComponent implements OnInit {
   search: FormGroup;
   source: any = [];
   ListCopy: any = [];
+  afterawait:boolean=false;
   constructor(public service: NewService, public router: Router, public fb: FormBuilder) {
 
   }
@@ -65,27 +66,27 @@ export class ExploreComponent implements OnInit {
     }
 
   }
-  getnewList() {
+  async getnewList() {
     // this.p=1;
     // this.size=10;
-    this.service.getList().subscribe(data => {
-      this.List = data;
-      this.ListCopy = Object.assign({}, this.List);
-      for (var i = 0; i < this.List.articles.length; i++) {
-        this.List.articles[i].id = i + 1;
-        this.source.push(this.List.articles[i].source.name)
+  // this.data =await this.service.getList()
+      this.List = await this.service.getList();
+      console.log('thh',this.List)
+      this.List=this.List.data;
+      console.log('iiiiiiiiiiiii',this.List)
+      this.ListCopy= await this.service.getList();
+      this.ListCopy=this.ListCopy.data
+      if(this.List!=undefined){
+        for(var i=0;i<this.List.articles.length;i++){
+          this.List.articles[i].id = i+1;
+        }
+        this.service.setListeddata(this.List.articles)
+      console.log(this.List, "this.Listthis.List",this.List, this.newArray);
+      this.afterawait=true;
       }
-      this.service.setListeddata(this.List.articles)
 
-      // var i=0;
-      // while(i<this.List.articles.length){
-      //   this.List.articles[i].id = i+1; 
-      // }
-      console.log(this.List, "this.Listthis.List", this.List, this.newArray);
+    }
 
-    });
-
-  }
   detailsPage(id) {
     console.log("id", id);
     this.router.navigateByUrl('home/explore/details/' + id)

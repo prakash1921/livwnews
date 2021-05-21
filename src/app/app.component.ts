@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   // constructor(public firebaseService:FirebaseService,public route: Router, public fb: FormBuilder,public toastr: ToastrManager){}
   constructor(public firebaseService: FirebaseService,
     public route: Router, public fb: FormBuilder,public router:Router) { }
-
+    userlogout: boolean=false;
   ngOnInit() {
     this.myForm = this.fb.group({
       'email': new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
@@ -65,16 +65,19 @@ export class AppComponent implements OnInit {
   getUserDetails(){
    this.userdetails= JSON.parse(localStorage.getItem('user'));
    console.log('user',this.userdetails)
-   if(this.userdetails!=undefined){
+   if(this.userdetails!=null){
     console.log('user',this.userdetails.providerData[0])
     this.userName=this.userdetails.providerData[0].displayName;
     this.userimg=this.userdetails.providerData[0].photoURL;
   
+   }else{
+    this.userlogout=true;
    }
   }
  async  logout() {
     await this.firebaseService.logout();
     this.userdetails=undefined;
+    this.userlogout=true;
     this.router.navigateByUrl('login')
   }
   get f() { return this.myForm.controls; }

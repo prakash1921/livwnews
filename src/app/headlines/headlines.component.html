@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" *ngIf='afterawait==true'>
     <div class="card mb-3">
         <div class="card-header">
           Select Filters
@@ -20,7 +20,7 @@
             </div>
             </div>
     <h1 style="text-align: center;">News List</h1>
-    <div class="row" *ngIf='List.length!=0'>
+    <div class="row" *ngIf='List!=undefined'>
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -44,7 +44,7 @@
               <tbody style="text-align: -webkit-center !important;">
                 <tr
                   
-                  *ngFor="let item of List.articles | paginate: {itemsPerPage: 5, currentPage: p}" (click)="$event.stopPropagation();detailsPage(item.id)">
+                  *ngFor="let item of List.articles  | paginate: {itemsPerPage: 5, currentPage: p}" (click)="$event.stopPropagation();detailsPage(item.id)">
                   <td>
                    <img src="{{item.urlToImage}}" style="width: 80%;">
                   </td>

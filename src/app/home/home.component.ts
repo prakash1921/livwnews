@@ -18,6 +18,8 @@ submitted = false;
 emailneed: string='';
 userName: any='';
 userimg: any='';
+  userlogout: boolean=false;
+  userdetails: any;
 constructor(public firebaseService:FirebaseService,public router:Router){}
 
   ngOnInit() :void{
@@ -26,13 +28,20 @@ constructor(public firebaseService:FirebaseService,public router:Router){}
   logout(){
     this.firebaseService.logout();
     this.isLogout.emit();
+    this.userlogout=true;
 this.router.navigateByUrl('login')
 
   }
   getUserDetails(){
-    var userdetails= JSON.parse(localStorage.getItem('user'));
-    console.log('user',userdetails.providerData[0])
-     this.userName=userdetails.providerData[0].displayName;
-     this.userimg=userdetails.providerData[0].photoURL;
+   this.userdetails= JSON.parse(localStorage.getItem('user'));
+    console.log('user',this.userdetails)
+    if(this.userdetails!=null){
+      console.log('user',this.userdetails.providerData[0])
+      this.userName=this.userdetails.providerData[0].displayName;
+      this.userimg=this.userdetails.providerData[0].photoURL;
+    
+     }else{
+      this.userlogout=true;
+     }
    }
 }

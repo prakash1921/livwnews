@@ -15,12 +15,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExploreComponent } from './explore/explore.component';
 import { FollowComponent } from './follow/follow.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HttpClient } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ExploredetailsComponent } from './explore/exploredetails/exploredetails.component';
 import { LoginComponent } from './login/login.component';
 import { HomeModule } from './home/home.module';
+import { Http, HttpModule } from '@angular/http';
+import { AuthGuard } from './auth.guard';
+import axios from 'axios';
 // import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { HomeModule } from './home/home.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-
+HttpModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot() ,
     NgxPaginationModule ,
@@ -53,7 +56,7 @@ import { HomeModule } from './home/home.module';
     FormsModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA ],
- providers:[AngularFireAuth,FirebaseService],
+ providers:[AngularFireAuth,FirebaseService,AuthGuard,{provide: HttpClient, useValue: axios}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

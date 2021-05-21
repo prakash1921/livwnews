@@ -15,6 +15,7 @@ export class HeadlinesComponent implements OnInit {
   newArray: any=[];
   search: FormGroup
   ListCopy: any=[];
+  afterawait:boolean=false;
   constructor(public service: NewService,public router:Router,  public fb: FormBuilder) {
 
   }
@@ -28,32 +29,42 @@ export class HeadlinesComponent implements OnInit {
   }
   getvalue(value){
     if(value!=''){
-      
-      this.List.articles = this.ListCopy.articles.filter(item => item.author == value)
       console.log('ee',this.List.articles)
+      console.log('ff',this.ListCopy.articles)
+      this.List.articles = this.ListCopy.articles.filter(item => item.author == value)
+      console.log('rr',this.List.articles)
        
     }else{
       this.getnewList()
     }
   }
 
-  getnewList() {
+   async getnewList() {
     // this.p=1;
     // this.size=10;
-    this.service.getList().subscribe(data => {
-      this.List = data;
-      this.ListCopy=data;
-      for(var i=0;i<this.List.articles.length;i++){
-        this.List.articles[i].id = i+1;
+  // this.data =await this.service.getList()
+      this.List = await this.service.getList();
+      console.log('thh',this.List)
+      this.List=this.List.data;
+      console.log('iiiiiiiiiiiii',this.List)
+      this.ListCopy= await this.service.getList();
+      this.ListCopy=this.ListCopy.data
+      if(this.List!=undefined){
+        for(var i=0;i<this.List.articles.length;i++){
+          this.List.articles[i].id = i+1;
+        }
+        this.service.setListeddata(this.List.articles)
+      console.log(this.List, "this.Listthis.List",this.List, this.newArray);
+      this.afterawait=true;
       }
-      this.service.setListeddata(this.List.articles)
+     
+  
       // var i=0;
       // while(i<this.List.articles.length){
       //   this.List.articles[i].id = i+1;
       // }
-      console.log(this.List, "this.Listthis.List",this.List, this.newArray);
 
-    });
+    // });
 
   }
   detailsPage(id){
