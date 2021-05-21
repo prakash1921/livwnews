@@ -29,6 +29,7 @@
             "scripts": []
           },
           "configurations": {
+
             "production": {
               "fileReplacements": [
                 {
@@ -58,6 +59,10 @@
                 }
               ]
             }
+          },
+          "environmentSource":"environments/environment.ts",
+          "environments":{
+            "prod":"environments/environment.prod.ts"
           }
         },
         "serve": {

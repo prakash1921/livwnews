@@ -25,6 +25,7 @@ import { Http, HttpModule } from '@angular/http';
 import { AuthGuard } from './auth.guard';
 import axios from 'axios';
 // import { CommonModule } from '@angular/common';
+import {environment} from  '../environments/environment'
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,15 +43,7 @@ HttpModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot() ,
     NgxPaginationModule ,
-    AngularFireModule.initializeApp( {
-      apiKey: "AIzaSyDpIgXXk7t09gBclR-qYyqp1A-F_HFCQR4",
-      authDomain: "news-c3236.firebaseapp.com",
-      projectId: "news-c3236",
-      storageBucket: "news-c3236.appspot.com",
-      messagingSenderId: "552334450318",
-      appId: "1:552334450318:web:c02781424ce4aa4d3773df",
-      measurementId: "G-46LN3B095C"
-    }),
+    AngularFireModule.initializeApp( environment.firebase),
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
