@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NewService {
   public headers: Headers;
-  public  proxyUrl ='https://cors-anywhere.news-c3238.web.app/'
+  public  proxyUrl ='http://cors-anywhere.news-c3238.web.app/'
   // public  proxyUrl ='https://cors-anywhere.localhost:4200/'
 
   // public requestoptions: RequestOptions;

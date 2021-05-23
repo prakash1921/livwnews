@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "news-c3238"
+    "default": "news-c3238",
+    "livenews": "news-c3238"
   }
 }
