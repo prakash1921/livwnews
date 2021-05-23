@@ -12,16 +12,18 @@ import { environment } from 'src/environments/environment';
 })
 export class NewService {
   public headers: Headers;
-  // public  proxyUrl ='https://news-c3238.web.app/'
-  // public  proxyUrl ='https://localhost:4200'
+  public  proxyUrl ='https://cors-anywhere.news-c3238.web.app/'
+  // public  proxyUrl ='https://cors-anywhere.localhost:4200/'
 
   // public requestoptions: RequestOptions;
   dataList:any=[]
-  url: any = 'https://newsapi.org/v2/everything?q=tesla&from=2021-05-20&sortBy=publishedAt&apiKey='+environment.newskey;
+  url: any = `${this.proxyUrl}https://newsapi.org/v2/everything?q=tesla&from=2021-05-20&sortBy=publishedAt&apiKey=c791e422aa4140029eb0a9717782fdea`;
+
+  // url: any = 'https://newsapi.org/v2/everything?q=tesla&from=2021-05-20&sortBy=publishedAt&apiKey='+environment.newskey;
   constructor(public http: HttpClient) { }
 async  getList() {
 // console.log('prrr',process.env)
-  return await  axios.get(this.url,{headers: {'Authorization': 'Bearer '+ environment.newskey}});
+  return await  axios.get(this.url,{headers: {'Authorization': 'Bearer '+ 'c791e422aa4140029eb0a9717782fdea'}});
   }
   setListeddata(data){
     this.dataList=data

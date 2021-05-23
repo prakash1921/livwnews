@@ -59,11 +59,8 @@
                 }
               ]
             }
-          },
-          "environmentSource":"environments/environment.ts",
-          "environments":{
-            "prod":"environments/environment.prod.ts"
           }
+         
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
